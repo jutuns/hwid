@@ -21,7 +21,7 @@ DcUsername = response
 DcWebhook = "https://discord.com/api/webhooks/1161528324141617213/026-pHMimh1_KMMiH5fTp4Tjy3SfOFCDthqkTz2zHa_L4PvW9hm_92Cq9oZHvzJdjXKQ"
 if response:find("404") then
     print("HWID NOT REGISTERED, CONTACT : JUTUN STORE")
-    print(DcUsername)
+    print(hwid)
 else
     activateScript = true
 end
