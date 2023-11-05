@@ -166,7 +166,7 @@ function infoJutun()
         }
     )
     $embedObject = @{
-        title = "**ROTASI OLYMPUS**"
+        title = "**ROTASI OLYMPUS V1.2**"
         color = "16777215"
         footer = $footerObject
         thumbnail = $thumbnailObject
