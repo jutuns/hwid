@@ -1,21 +1,3 @@
---========= AUTO RECYCLE BY JUTUN STORE =========--
-
-itmId = 4584 --itmId to recycle
-
-storageBlock = "" -- storage block to recycle
-doorBlock = "" -- door id block to recycle
-
-autoBuyPack = true -- auto buy pack after recycle
-storagePack = "" -- storage drop pack
-doorPack = "" -- door id drop pack
-patokanPack = 880
-
-packName = "pristine_hammer"
-packList = {6238}
-packPrice = 5000
-
-webhookInfo = "https://discord.com/api/webhooks/1172666329254346813/RehABzTEv9INYIjbA1TjDacTMoxXFRu89Wjyzsb28XSDz_y2YiSVBBNAY-n6k0IsP4-N"
-
 --============== DONT TOUCH BELOW ==============--
 bot = getBot()
 gmz = bot.gem_count
@@ -77,12 +59,11 @@ function jutunInfo(status)
 end
 
 while true do
-        -- join world storage block
-        while not bot:isInWorld(storageBlock:upper()) or getTile(getBot().x,getBot().y).fg == 6 do
-            bot:warp(storageBlock,doorBlock)
-            sleep(8000)
-        end
-    
+    -- join world storage block
+    while not bot:isInWorld(storageBlock:upper()) or getTile(getBot().x,getBot().y).fg == 6 do
+        bot:warp(storageBlock,doorBlock)
+        sleep(8000)
+    end
         -- take block
         while bot:getInventory():findItem(itmId) == 0 do
             if countBlock(itmId) > 0 then
@@ -101,7 +82,6 @@ while true do
                 removeBot()
             end
         end
-    
         -- recycle block
         while bot:getInventory():findItem(itmId) > 0 do
             trz = bot:getInventory():findItem(itmId)
@@ -119,36 +99,36 @@ while true do
             jutunInfo(bot.name.." Recycle ".. trz .." ".. nameItem .." Get ".. currentProfitRecycle .." <:gems:1167424601559666719> | Total Profit <:gems:1167424601559666719> : "..totalProfitRecycle)
         end
     
-        -- store pack
-        if bot.gem_count > packPrice then
-            botInfo(bot.name.." Buy Pack ".. namePack)
-            jutunInfo(bot.name.." Buy Pack ".. namePack)
-            while not bot:isInWorld(storagePack:upper()) or getTile(getBot().x,getBot().y).fg == 6 do
-                bot:warp(storagePack,doorPack)
-                sleep(8000)
-            end
-            while bot.gem_count > packPrice do
-                bot:sendPacket(2,"action|buy\nitem|"..packName)
-                sleep(1000)
-            end
-            botInfo(bot.name.." Store Pack")
-            for _,pack in pairs(packList) do
-                for _,tile in pairs(bot:getWorld():getTiles()) do
-                    if tile.fg == patokanPack or tile.bg == patokanPack then
-                        bot:findPath(tile.x - 1,tile.y)
-                        sleep(1000)
-                        if bot:getInventory():findItem(pack) > 0 then
-                            bot:sendPacket(2,"action|drop\n|itemID|"..pack)
-                            sleep(500)
-                            bot:sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|"..pack.."|\ncount|"..bot:getInventory():findItem(pack))
-                            sleep(500)
-                        end
-                    end
-                    if bot:getInventory():findItem(pack) == 0 then
-                        break
+    -- store pack
+    if bot.gem_count > packPrice then
+        botInfo(bot.name.." Buy Pack ".. namePack)
+        jutunInfo(bot.name.." Buy Pack ".. namePack)
+        while not bot:isInWorld(storagePack:upper()) or getTile(getBot().x,getBot().y).fg == 6 do
+            bot:warp(storagePack,doorPack)
+            sleep(8000)
+        end
+        while bot.gem_count > packPrice do
+            bot:sendPacket(2,"action|buy\nitem|"..packName)
+            sleep(1000)
+        end
+        botInfo(bot.name.." Store Pack")
+        for _,pack in pairs(packList) do
+            for _,tile in pairs(bot:getWorld():getTiles()) do
+                if tile.fg == patokanPack or tile.bg == patokanPack then
+                    bot:findPath(tile.x - 1,tile.y)
+                    sleep(1000)
+                    if bot:getInventory():findItem(pack) > 0 then
+                        bot:sendPacket(2,"action|drop\n|itemID|"..pack)
+                        sleep(500)
+                        bot:sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|"..pack.."|\ncount|"..bot:getInventory():findItem(pack))
+                        sleep(500)
                     end
                 end
+                if bot:getInventory():findItem(pack) == 0 then
+                    break
+                end
             end
-            gmz = bot.gem_count
         end
+        gmz = bot.gem_count
+    end
 end
