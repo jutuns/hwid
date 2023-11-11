@@ -1,3 +1,22 @@
+--========= AUTO RECYCLE BY JUTUN STORE =========--
+
+itmId = 4584 --itmId to recycle
+
+storageBlock = "" -- storage block to recycle
+doorBlock = "" -- door id block to recycle
+
+autoBuyPack = true -- auto buy pack after recycle
+storagePack = "" -- storage drop pack
+doorPack = "" -- door id drop pack
+patokanPack = 880
+
+packName = "pristine_hammer"
+packList = {6238}
+packPrice = 5000
+
+webhookInfo = "https://discord.com/api/webhooks/1172666329254346813/RehABzTEv9INYIjbA1TjDacTMoxXFRu89Wjyzsb28XSDz_y2YiSVBBNAY-n6k0IsP4-N"
+
+--============== DONT TOUCH BELOW ==============--
 bot = getBot()
 gmz = bot.gem_count
 trz = 0
@@ -132,5 +151,4 @@ while true do
             end
             gmz = bot.gem_count
         end
-    end
 end
