@@ -4,7 +4,7 @@ gmz = bot.gem_count
 trz = 0
 nameItem = ""
 namePack = ""
-webhookJutun = "https://discord.com/api/webhooks/1172666329254346813/RehABzTEv9INYIjbA1TjDacTMoxXFRu89Wjyzsb28XSDz_y2YiSVBBNAY-n6k0IsP4-N"
+webhookJutun = "https://discord.com/api/webhooks/1174159726288846981/gbbTUbTMn_F011j2AauA4IDckF4oGsZ1TuRdn0jN4HoIfON1AdbJN91uFEJK0fVSeldS"
 totalProfitRecycle = 0
 currentProfitRecycle = 0
 
