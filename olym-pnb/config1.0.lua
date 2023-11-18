@@ -1,3 +1,42 @@
+--============= CREATED BY JUTUN STORE =============--
+--================== VERSION V1.1 ==================--
+
+worldList = { -- Support multiple world
+    "SALDOF"
+}
+doorPNB = "MAMABOS" -- Door id world
+
+itmId = 4584
+itmSeed = itmId + 1
+
+--==== STORAGE SETTINGS
+storagePack, doorPack, patokanPack = "", "DOORID", 880
+storageBlock, doorBlock, patokanBlock = "TUSCANA", "MAMABOS", 880
+storageSeed, doorSeed, patokanSeed = "PEPACIL3", "MAMABOS", 880
+
+--==== BOT PNB SETTINGS
+patokanPNB = 20
+delayPunch = 190
+delayPlace = 180
+customY = 2
+
+--==== BOT GAUT SETTINGS
+autoRetrieve = true -- Set true if want to auto retrieve gaut (world must small lock only)
+restTake = 20000 -- ms
+
+removeBotAfterReachTarget = false -- Set true if remove bot after reach target gems
+targetGems = 100000
+
+--==== PACK SETTINGS
+packName = "world_lock"
+packList = {242}
+packPrice = 2000
+packBuyCount = 1
+
+--==== WEBHOOK SETTINGS
+activeWebhook = true -- set true if want sent webhook
+webhookLink = ""
+
 --=============  DONT TOUCH BELOW =============--
 --=============  DONT TOUCH BELOW =============--
 
@@ -131,7 +170,7 @@ function takeBlock()
         warp(storageBlock,doorBlock)
         sleep(100)
     end
-    while findItem(itmId) == 0 do
+    while findItem(itmId) < 10 do
         countBlock = checkFloat(itmId)
         if countBlock == 0 then
             removeBot(getBot().name)
