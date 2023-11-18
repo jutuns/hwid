@@ -173,6 +173,8 @@ function pnb()
         setJob("Put and Break")
         if findItem(itmId) < 5 then
             takeBlock()
+            sleep(100)
+            findPath(botposX,botposY)
         end
         if getTile(botposX,botposY + customY).fg == 0 and getTile(botposX,botposY + customY).bg == 0 then
             place(itmId,0,customY)
