@@ -130,21 +130,19 @@ function takeBlock()
         warp(storageBlock,doorBlock)
         sleep(100)
     end
-    while findItem(itmId) < 10 do
-        countBlock = checkFloat(itmId)
-        if countBlock == 0 then
-            removeBot(getBot().name)
-        end
-        for _, obj in pairs(getObjects()) do
-            if obj.id == itmId then
-                findPath(math.floor(obj.x/32),math.floor(obj.y/32))
-                sleep(100)
-                collect(2)
-                sleep(100)
-                reconnect(storageBlock,doorBlock,math.floor(obj.x/32),math.floor(obj.y/32))
-                if findItem(itmId) > 0 then
-                    break
-                end
+    countBlock = checkFloat(itmId)
+    if countBlock == 0 then
+        removeBot(getBot().name)
+    end
+    for _, obj in pairs(getObjects()) do
+        if obj.id == itmId then
+            findPath(math.floor(obj.x/32),math.floor(obj.y/32))
+            sleep(100)
+            collect(2)
+            sleep(100)
+            reconnect(storageBlock,doorBlock,math.floor(obj.x/32),math.floor(obj.y/32))
+            if findItem(itmId) > 0 then
+                break
             end
         end
     end
