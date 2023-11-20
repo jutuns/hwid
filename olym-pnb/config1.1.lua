@@ -114,8 +114,8 @@ function checker()
         gmz = bot.gems
         gems  = gems + gmz
         ttl  = ttl + 1
-        nama  = "<:cid:1164109977112301580> [ "..iconOnOff(bot.status) .." ]".. " [ " .. bot.name:upper() .. " ] "
-        level = "[ "..bot.level.." ]"
+        nama  = "<:cid:1164109977112301580> ["..iconOnOff(bot.status) .."]".. " [" .. bot.name:upper() .. "] "
+        level = "["..bot.level.."]"
         desc1 = desc1 .. nama .. level .. "`n"
     end
     te = os.time() - tt
@@ -342,7 +342,7 @@ function storeSeed()
             end
         end
     end
-    totalBlock = checkFloat(itmSeed)
+    totalSeed = checkFloat(itmSeed)
     while getBot().world ~= worldPNB:upper() or getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 do
         warp(worldPNB,doorPNB)
         sleep(100)
@@ -571,7 +571,7 @@ if activateScript then
             end
             while true do
                 totalGems = checkFloat(112)
-                desc1, desc2 = checker()
+                desc1 = checker()
                 sleep(100)
                 webhookInfo(desc1)
                 sleep(restTake)
@@ -623,7 +623,7 @@ if activateScript then
         while true do
             if botIndex % maxBot == 0 then
                 totalGems = checkFloat(112)
-                desc1, desc2 = checker()
+                desc1 = checker()
                 sleep(100)
                 webhookInfo(desc1)
             end
