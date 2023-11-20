@@ -222,7 +222,7 @@ function takeBlock()
     if countBlock == 0 then
         disconnect()
         setJob("No Item at Storage")
-        
+        error()
     end
     for _, obj in pairs(getObjects()) do
         if obj.id == itmId then
@@ -332,7 +332,9 @@ function storeSeed()
             if tileDrop(tile.x,tile.y,findItem(itmSeed)) then
                 findPath(tile.x - 1,tile.y)
                 sleep(100)
-                drop(itmSeed)
+                sendPacket("action|drop\n|itemID|"..itmSeed,2)
+                sleep(500)
+                sendPacket("action|dialog_return\ndialog_name|drop_item\nitemID|"..itmSeed.."|\ncount|"..findItem(itmSeed),2)
                 sleep(100)
                 if findItem(itmSeed) == 0 then
                     break
@@ -360,7 +362,9 @@ function storeBlock()
             if tileDrop(tile.x,tile.y,findItem(itmId)) then
                 findPath(tile.x - 1,tile.y)
                 sleep(100)
-                drop(itmId)
+                sendPacket("action|drop\n|itemID|"..itmId,2)
+                sleep(500)
+                sendPacket("action|dialog_return\ndialog_name|drop_item\nitemID|"..itmId.."|\ncount|"..findItem(itmId),2)
                 sleep(100)
                 if findItem(itmId) == 0 then
                     break
