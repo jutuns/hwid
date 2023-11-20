@@ -17,7 +17,7 @@ end
 hwid = get_hwid()
 
 client = HttpClient.new()
-client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-pnb-no-gaut/"..hwid
+client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-pnb/"..hwid
 local response = client:request().body
 
 if response:find("404") then
@@ -202,6 +202,7 @@ function countItem()
 end
 
 function pnb()
+    otw(worldPNB,doorPNB)
     bot.auto_collect = true
     if bot:getInventory():findItem(6336) == 0 then
         autoTutorial()
@@ -211,7 +212,7 @@ function pnb()
         takeBlock()
     end
     bot:findPath(botposX,botposY)
-    while bot:getInventory():findItem(itmId) > 0 and bot:isInWorld(worldPNB:upper()) and bot:isInTile(botposX,botposY) do
+    while bot:getInventory():findItem(itmId) > 0 and bot:getInventory():findItem(itmSeed) < dropSeedCount and bot:isInWorld(worldPNB:upper()) and bot:isInTile(botposX,botposY) do
         if bot:getInventory():findItem(6336) == 0 then
             autoTutorial()
             sleep(100)
@@ -257,7 +258,7 @@ function pnb()
         bot.auto_collect = true
         sleep(100)
     end
-    if bot:getInventory():findItem(itmSeed) == 200 then
+    if bot:getInventory():findItem(itmSeed) >= dropSeedCount then
         bot.auto_collect = false
         sleep(100)
         storeSeed()
@@ -272,7 +273,7 @@ function storeSeed()
     otw(storageSeed,doorSeed)
     for _, tile in pairs(bot:getWorld():getTiles()) do
         if tile.fg == patokanSeed or tile.bg == patokanSeed then
-            if tileDrop(tile.x,tile.y,200) then
+            if tileDrop(tile.x,tile.y,bot:getInventory():findItem(itmSeed)) then
                 bot:findPath(tile.x - 1,tile.y)
                 bot:setDirection(false)
                 sleep(100)
