@@ -240,7 +240,7 @@ function pnb()
             sleep(500)
         end
         while bot.gem_count > packPrice do
-            for i = 1, packBuyCount do
+            for i = 1, buyPackCount do
                 if bot.gem_count > packPrice then
                     bot:sendPacket(2,"action|buy\nitem|"..packName)
                     sleep(1000)
