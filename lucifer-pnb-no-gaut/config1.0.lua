@@ -309,7 +309,7 @@ function storePack()
         for _,pack in pairs(packList) do
             for _,tile in pairs(bot:getWorld():getTiles()) do
                 if tile.fg == patokanPack or tile.bg == patokanPack then
-                    if tileDrop(tile.x,tile.y,findItem(pack)) then
+                    if tileDrop(tile.x,tile.y,bot:getInventory():findItem(pack)) then
                         bot:findPath(tile.x - 1,tile.y)
                         sleep(100)
                         reconnect(storagePack,doorPack,tile.x - 1,tile.y)
