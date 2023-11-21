@@ -493,7 +493,7 @@ function takeSeed(world)
             if obj.id == itmSeed then
                 bot:findPath(round(obj.x / 32),math.floor(obj.y / 32))
                 sleep(1000)
-                collect(2)
+                bot:collect(2,100)
                 sleep(1000)
             end
             if findItem(itmSeed) > 0 then
