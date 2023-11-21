@@ -17,7 +17,7 @@ end
 hwid = get_hwid()
 
 client = HttpClient.new()
-client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-pnb/"..hwid
+client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-pnb-no-gaut/"..hwid
 local response = client:request().body
 
 if response:find("404") then
