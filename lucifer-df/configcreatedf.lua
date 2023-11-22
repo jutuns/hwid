@@ -519,8 +519,6 @@ function isPlantable(tile)
     return tempTile and ( collision == 1 or collision == 2 )-- 1 = solid, 2 = platforms
 end
 
-if getTile(x,y).fg == 0 and isPlantable(getTile(x,y)) then
-
 function plant(world)
     for _,tile in pairs(bot:getWorld():getTiles()) do
         if findItem(itmSeed) == 0 then
