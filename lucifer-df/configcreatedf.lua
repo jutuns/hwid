@@ -611,8 +611,6 @@ end
 if activateScript then
     if takePick and findItem(98) == 0 then
         takePickaxe()
-        sleep(100)
-        warpz("EXIT")
     end
     for _,world in pairs(worldList) do
         if not multipleBot or indexBot == 0 then
