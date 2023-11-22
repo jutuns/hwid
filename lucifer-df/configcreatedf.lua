@@ -527,7 +527,7 @@ function plant(world)
         end
         if getTile(tile.x,tile.y - 1).fg == 0 and isPlantable(getTile(tile.x,tile.y - 1)) and (not multipleBot or ((tile.y) % (jmlBot)) == indexBot) then
             findPath(tile.x,tile.y - 1)
-            while getTile(tile.x,tile.y - 1).fg == 0 and getTile(tile.x,tile.y).flags ~= 0 do
+            while getTile(tile.x,tile.y - 1).fg == 0 do
                 place(itmSeed,0,0)
                 sleep(110)
                 reconnect(world,doorFarm,tile.x,tile.y - 1)
