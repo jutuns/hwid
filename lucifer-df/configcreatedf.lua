@@ -493,7 +493,7 @@ function takeSeed(world)
             if obj.id == itmSeed then
                 bot:findPath(round(obj.x / 32),math.floor(obj.y / 32))
                 sleep(1000)
-                bot:collect(2,100)
+                collect(2)
                 sleep(1000)
             end
             if findItem(itmSeed) > 0 then
@@ -510,16 +510,27 @@ function takeSeed(world)
     sleep(100)
 end
 
+function isPlantable(tile)
+    local tempTile = getTile(tile.x, tile.y + 1) -- get tile below
+    if not tempTile.fg then 
+        return false 
+    end
+    local collision = getInfo(tempTile.fg).collision_type
+    return tempTile and ( collision == 1 or collision == 2 )-- 1 = solid, 2 = platforms
+end
+
+if getTile(x,y).fg == 0 and isPlantable(getTile(x,y)) then
+
 function plant(world)
     for _,tile in pairs(bot:getWorld():getTiles()) do
         if findItem(itmSeed) == 0 then
             takeSeed(world)
             sleep(100)
         end
-        if tile.y ~= 0 and getTile(tile.x,tile.y - 1).fg == 0 and (not multipleBot or ((tile.y) % (jmlBot)) == indexBot) then
-            bot:findPath(tile.x,tile.y - 1)
-            if getTile(tile.x,tile.y - 1).fg == 0 then
-                bot:place(bot.x,bot.y,itmSeed)
+        if getTile(tile.x,tile.y - 1).fg == 0 and isPlantable(getTile(tile.x,tile.y - 1)) and (not multipleBot or ((tile.y) % (jmlBot)) == indexBot) then
+            findPath(tile.x,tile.y - 1)
+            while getTile(tile.x,tile.y - 1).fg == 0 and getTile(tile.x,tile.y).flags ~= 0 do
+                place(itmSeed,0,0)
                 sleep(110)
                 reconnect(world,doorFarm,tile.x,tile.y - 1)
             end
@@ -530,10 +541,10 @@ function plant(world)
             takeSeed(world)
             sleep(100)
         end
-        if tile.y ~= 0 and getTile(tile.x,tile.y - 1).fg == 0 then
-            bot:findPath(tile.x,tile.y - 1)
-            if getTile(tile.x,tile.y - 1).fg == 0 then
-                bot:place(bot.x,bot.y,itmSeed)
+        if getTile(tile.x,tile.y - 1).fg == 0 and isPlantable(getTile(tile.x,tile.y - 1)) and (not multipleBot or ((tile.y) % (jmlBot)) == indexBot) then
+            findPath(tile.x,tile.y - 1)
+            while getTile(tile.x,tile.y - 1).fg == 0 and getTile(tile.x,tile.y).flags ~= 0 do
+                place(itmSeed,0,0)
                 sleep(110)
                 reconnect(world,doorFarm,tile.x,tile.y - 1)
             end
