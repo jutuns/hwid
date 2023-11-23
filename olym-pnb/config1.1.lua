@@ -481,6 +481,7 @@ if activateScript then
     if getBot().world:find(getBot().name:upper()) and findItem(9640) > 0 then
         while findItem(9640) > 0 do
             place(9640,0,-1)
+            sleep(5000)
         end
     end
     if takePick and findItem(98) == 0 then
