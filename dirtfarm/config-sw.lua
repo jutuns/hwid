@@ -48,14 +48,20 @@ function log(txt)
 end
 
 function warp(worldName)
-    while getBot().world ~= worldName:upper() do
+    cok = 0
+    while getBot().world ~= worldName:upper() and not nuked do
         sendPacket(3,"action|join_request\nname|"..worldName:upper().."\ninvitedWorld|0")
         sleep(5000)
+        if cok == 10 then
+            nuked = true
+        else
+            cok = cok + 1
+        end
     end
 end
 
 function join(worldName,id)
-    while getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 do 
+    while getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 and not nuked do 
         sendPacket(3,"action|join_request\nname|"..worldName:upper().."|"..id:upper().."\ninvitedWorld|0")
         sleep(1000)
     end
@@ -325,12 +331,13 @@ end
 
 function checkWorld()
     repeat
+        nuked = false
         world = name(letterCount)
         setJob("Going to "..world)
         sleep(100)
         warp(world)
         sleep(100)
-    until checkLock() and countTile()
+    until checkLock() and countTile() and not nuked
     if useSignalJammer then
         placeIt(-1,-1,226)
         sleep(100)
