@@ -52,9 +52,15 @@ function log(txt)
 end
 
 function warpz(worldName)
-    while not bot:isInWorld(worldName:upper()) do
+    cok = 0
+    while not bot:isInWorld(worldName:upper()) and not nuked do
         bot:sendPacket(3,"action|join_request\nname|"..worldName:upper().."\ninvitedWorld|0")
         sleep(5000)
+        if cok == 5 then
+            nuked = true
+        else
+            cok = cok + 1
+        end
     end
 end
 
@@ -306,11 +312,12 @@ end
 
 function checkWorld()
     repeat
+        nuked = false
         world = name(letterCount)
         print("Going world "..world)
         warpz(world)
         sleep(100)
-    until checkLock() and countTile()
+    until checkLock() and countTile() and not nuked
     if useSignalJammer then
         placeIt(-1,-1,226)
         sleep(100)
