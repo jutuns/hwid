@@ -2,7 +2,7 @@
 --=============  DONT TOUCH BELOW =============--
 --=============================================--
 
-activateScript = false
+activateScript = true
 function get_hwid()
     local cmd = io.popen("wmic cpu get ProcessorId /format:list")
     if cmd then
@@ -444,69 +444,6 @@ function takeUT()
     reconnect(worldPNB,doorPNB,utX,utY-1)
 end
 
-function generateWorld()
-    str = ""
-    for i = 1, 12 do
-        str = str..string.char(math.random(97,122))
-    end
-    return str
-end
-
-function skipTutorial()
-    while findItem(6336) == 0 and getBot().world ~= "EXIT" do
-        setJob("Skip Tutorial")
-        sleep(500)
-        sendPacket("ftue_start_popup_close",2)
-        sleep(1000)
-        findPath(86,30)
-        sleep(1000)
-        enter()
-        sleep(3000)
-        findPath(46,23)
-        sleep(500)
-        for i=0,4,1 do
-            punch(1,0)
-            sleep(200)
-        end
-        place(2,1,0)
-        sleep(500)
-        for i=0,4,1 do
-            punch(1,0)
-            sleep(200)
-        end
-        collect(3)
-        sleep(1240)
-        place(3,1,0)
-        sleep(2000)
-        place(10672,1,0)
-        sleep(2500)
-        punch(1,0)
-        sleep(2500)
-        move(1,0)
-        collect(2)
-        sleep(2500)
-        wear(48)
-        sleep(1000)
-        sendPacket("action|quit_to_exit",3)
-        sleep(1000)
-        sendPacket("action|join_request\nname|" .. generateWorld() .."\ninvitedWorld|0",3)
-        while getBot().world == "EXIT" do
-            sleep(2000)
-        end
-        place(9640,0,-1)
-        sleep(5000)
-        if findItem(6336) == 0 then
-            setJob("Failed Skip Tutorial")
-            disconnect()
-            sleep(5000)
-            while getBot().status ~= "online" do
-                connect()
-                sleep(5000)
-            end
-        end
-    end
-end
-
 function takePickaxe()
     setJob("Take Pickaxe")
     sleep(100)
@@ -541,13 +478,13 @@ function takePickaxe()
 end
 
 if activateScript then
-    if getBot().world:find("TUTORIAL") then
-        skipTutorial()
+    if getBot().world:find(getBot().name:upper()) and findItem(9640) > 0 then
+        while findItem(9640) > 0 do
+            place(9640,0,-1)
+        end
     end
     if takePick and findItem(98) == 0 then
         takePickaxe()
-        sleep(100)
-        warp("EXIT")
     end    
     worldPNB = worldList[math.ceil(botIndex/maxBot)]
     webhookEvents = webhookEvents[math.ceil(botIndex/maxBot)]
