@@ -484,7 +484,7 @@ function reconnect(world,id,x,y)
         while getBot().status ~= "online" do
             connect()
             sleep(10000)
-            if getBot().status == "suspended" or getBot().status == "banned" or getBot().status == "temporary ban" then
+            if getBot().status == "suspended" or getBot().status == "banned" then
                 botInfo(webhookOffline,":red_circle: "..getBot().name.." ("..indexBot..") bot status is "..getBot().status)
                 sleep(100)
                 if changeBotSuspended then
@@ -1196,7 +1196,7 @@ if activateScript then
     while getBot().status ~= "online" do
         connect()
         sleep(8500)
-        while getBot().status == "suspended" or getBot().status == "banned" or getBot().status == "got captcha" or getBot().status == "temporary ban" do
+        while getBot().status == "suspended" or getBot().status == "banned" or getBot().status == "got captcha" do
             sleep(100)
             removeBot(getBot().name)
             error()
@@ -1212,7 +1212,7 @@ if activateScript then
     while getBot().status ~= "online" do
         connect()
         sleep(8500)
-        while getBot().status == "suspended" or getBot().status == "banned" or getBot().status == "got captcha" or getBot().status == "temporary ban" do
+        while getBot().status == "suspended" or getBot().status == "banned" or getBot().status == "got captcha" do
             sleep(100)
             removeBot(getBot().name)
             error()
