@@ -1,4 +1,5 @@
-temporary banactivateScript = false
+------------------ Dont Touch ------------------
+activateScript = false
 
 function get_hwid()
     local cmd = io.popen("wmic cpu get ProcessorId /format:list")
@@ -412,7 +413,7 @@ function warp(world,id)
                 end
             end
             sendPacket("action|join_request\nname|"..world:upper().."|"..id:upper().."\ninvitedWorld|0",3)
-            sleep(delayWarp)
+            sleep(2000)
             if getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 and not nuked then
                 botInfo(webhookOffline,getBot().name.." ("..indexBot..")".." cannot join door, world is "..world:upper().." @everyone")
                 sleep(100)
@@ -502,12 +503,12 @@ function reconnect(world,id,x,y)
         sleep(100)
         while getBot().world ~= world:upper() do
             sendPacket("action|join_request\nname|"..world:upper().."\ninvitedWorld|0",3)
-            sleep(5000)
+            sleep(delayWarp)
         end
         if id ~= "" then
             while getTile(math.floor(getBot().x / 32),math.floor(getBot().y / 32)).fg == 6 do
                 sendPacket("action|join_request\nname|"..world:upper().."|"..id:upper().."\ninvitedWorld|0",3)
-                sleep(1000)
+                sleep(2000)
             end
         end
         if x and y then
