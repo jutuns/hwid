@@ -458,6 +458,7 @@ end
 
 function storeSeed(world)
     bot.auto_collect = false
+    bot.collect_interval = 99999999
     sleep(100)
     otw(storageSeed,doorSeed)
     sleep(100)
@@ -486,6 +487,7 @@ function storeSeed(world)
     otw(world,doorFarm)
     sleep(100)
     bot.auto_collect = true
+    bot.collect_interval = 100
 end
 
 function clear()
