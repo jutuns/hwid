@@ -51,7 +51,7 @@ function warp(worldName)
     cok = 0
     while getBot().world ~= worldName:upper() and not nuked do
         sendPacket(3,"action|join_request\nname|"..worldName:upper().."\ninvitedWorld|0")
-        sleep(5000)
+        sleep(8000)
         if cok == 5 then
             nuked = true
         else
