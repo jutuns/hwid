@@ -539,7 +539,7 @@ function plant(world)
             takeSeed(world)
             sleep(100)
         end
-        if getTile(tile.x,tile.y - 1).fg == 0 and isPlantable(getTile(tile.x,tile.y - 1)) and (not multipleBot or ((tile.y) % (jmlBot)) == indexBot) then
+        if getTile(tile.x,tile.y - 1).fg == 0 and isPlantable(getTile(tile.x,tile.y - 1)) then
             findPath(tile.x,tile.y - 1)
             while getTile(tile.x,tile.y - 1).fg == 0 and getTile(tile.x,tile.y).flags ~= 0 do
                 place(itmSeed,0,0)
