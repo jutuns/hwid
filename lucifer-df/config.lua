@@ -272,7 +272,7 @@ function take(id)
         sleep(500)
     end
     if bot:getInventory():findItem(242) > farmCount then
-        bot:sendPacket(2,"action|drop\n|itemID|202")
+        bot:sendPacket(2,"action|drop\n|itemID|242")
         bot:sendPacket(2,"action|dialog_return\ndialog_name|drop_item\nitemID|242|\ncount|"..(bot:getInventory():findItem(242) - farmCount))
         sleep(500)
     end
