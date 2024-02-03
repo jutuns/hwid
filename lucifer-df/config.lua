@@ -1,25 +1,17 @@
 --====================================================--
 activateScript = false
-function get_hwid()
-    local cmd = io.popen("wmic cpu get ProcessorId /format:list")
-    if cmd then
-        local output = cmd:read("*a")
-        cmd:close()
-        local hwid = output:match("ProcessorId=(%w+)")
-        return hwid or "HWID not found"
-    else
-        return "Unable to execute the command"
-    end
-end
-hwid = get_hwid()
-
+username = getUsername()
 client = HttpClient.new()
-client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-df/"..hwid
+client.url = "https://raw.githubusercontent.com/jutuns/hwid/main/lucifer-df/"..username
 local response = client:request().body
 
 if response:find("404") then
-    print("HWID NOT REGISTERED, CONTACT : JUTUN STORE")
-    print(hwid)
+    print("USERNAME NOT REGISTERED, CONTACT : JUTUN STORE")
+    messageBox = MessageBox.new()
+    messageBox.title = "JUTUN SCRIPT"
+    messageBox.description = "USERNAME NOT REGISTERED"
+    messageBox:send()
+    getBot():stopScript()
 else
     activateScript = true
 end
